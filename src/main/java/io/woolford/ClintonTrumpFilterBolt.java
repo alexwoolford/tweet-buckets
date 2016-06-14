@@ -35,6 +35,7 @@ public class ClintonTrumpFilterBolt extends BaseRichBolt {
         if (tweet.getText().toLowerCase().contains("trump") || tweet.getText().toLowerCase().contains("clinton")){
 
             logger.info("sentiment: " + sentiment + "; tweet text: " + tweet.getText());
+            //TODO: convert tweet to JSON
             collector.emit(new Values(tweet, sentiment));
         }
 
