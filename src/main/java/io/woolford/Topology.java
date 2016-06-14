@@ -14,7 +14,9 @@ public class Topology {
 
         TopologyBuilder b = new TopologyBuilder();
         b.setSpout("TwitterSampleSpout", new TwitterSampleSpout());
-        b.setBolt("TweetSentimentBolt", new TweetSentimentBolt()).shuffleGrouping("TwitterSampleSpout");
+        b.setBolt("EnglishTweetSentimentBolt", new EnglishTweetSentimentBolt()).shuffleGrouping("TwitterSampleSpout");
+        b.setBolt("ClintonTrumpFilterBolt", new ClintonTrumpFilterBolt()).shuffleGrouping("EnglishTweetSentimentBolt");
+
 
         final LocalCluster cluster = new LocalCluster();
         cluster.submitTopology(TOPOLOGY_NAME, config, b.createTopology());
